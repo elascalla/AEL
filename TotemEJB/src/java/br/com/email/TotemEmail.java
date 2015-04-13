@@ -29,7 +29,7 @@ public class TotemEmail {
 //    @EJB
 //    private static ITotemService iTotemService;
 
-    private String erick;
+    private String erick2;
     private static final String USERNAME = "andrevmdb@gmail.com";   /** Pegar do Parametro**/
     private static final String PASSWORD = "";                      /** Pegar do Parametro**/
 
