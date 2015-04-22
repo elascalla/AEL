@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.falhatotem.dao;
+package br.com.totem.dao;
 
-import javax.ejb.Remote;
+import br.com.totem.entity.Parametro;
 
 /**
  *
  * @author ericka
  */
-@Remote
-public interface IFalhaTotemDaoRemote {
+public interface IParametroDao {
     
+    public Parametro recuperaParametroPorNome(String nome) throws Exception;
 }

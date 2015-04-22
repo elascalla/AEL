@@ -6,14 +6,12 @@
 package br.com.totem.dao;
 
 import br.com.totem.entity.Acesso;
-import javax.ejb.Remote;
 
 /**
  *
  * @author ericka
  */
-@Remote
-public interface IAcessoDaoRemote {
+public interface IAcessoDao {
     
     public Acesso recuperaAcessoPorHashAndChave(Integer hash, String chave) throws Exception;
 }

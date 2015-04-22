@@ -5,7 +5,7 @@
  */
 package br.com.totem.wrapper;
 
-import br.com.pessoa.entity.Pessoa;
+import br.com.totem.entity.Pessoa;
 import java.util.Date;
 
 /**

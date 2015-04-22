@@ -5,11 +5,10 @@
  */
 package br.com.totem.dao.impl;
 
-import br.com.totem.dao.IAcessoDaoRemote;
+import br.com.generic.entity.EntityManagerUtil;
+import br.com.totem.dao.IAcessoDao;
 import br.com.totem.entity.Acesso;
 import br.com.util.TotemUtil;
-import javax.ejb.Remote;
-import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -17,13 +16,19 @@ import javax.persistence.PersistenceContext;
  *
  * @author ericka
  */
-@Stateless
-@Remote(IAcessoDaoRemote.class)
-public class AcessoDaoImpl implements IAcessoDaoRemote {
+public class AcessoDaoImpl implements IAcessoDao{
     
     @PersistenceContext(unitName = "totemPU")
-    private EntityManager entityManager;
+    private final EntityManager em;
     
+    public EntityManager getEntityManager() {
+        return em;
+    }
+    
+    public AcessoDaoImpl() {
+        this.em = EntityManagerUtil.getEntityManager();
+    }
+
     /**
      * 
      * @param hash
@@ -31,16 +36,18 @@ public class AcessoDaoImpl implements IAcessoDaoRemote {
      * @return 
      * @throws java.lang.Exception 
      */
+    @Override
     public Acesso recuperaAcessoPorHashAndChave(Integer hash, String chave) throws Exception {
         
         if(hash == null || TotemUtil.ehBrancoOrNulo(chave)){
             throw new Exception("Parâmetro inválidos.");
         }
         
-        return (Acesso) entityManager
+        return (Acesso) getEntityManager()
                     .createNamedQuery("Acesso.recuperaAcessoPorHashAndChave", Acesso.class)
                         .setParameter("hash", hash)
                         .setParameter("chave", chave)
                     .getSingleResult();
     }
+    
 }

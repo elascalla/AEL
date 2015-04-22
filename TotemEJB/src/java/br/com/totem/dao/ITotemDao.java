@@ -3,18 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.pessoa.service;
+package br.com.totem.dao;
 
-import br.com.pessoa.entity.Pessoa;
-import javax.ejb.Remote;
+import javax.persistence.EntityManager;
 
 /**
  *
  * @author ericka
  */
-@Remote
-public interface IPessoaServiceRemote {
+public interface ITotemDao {
     
-    public Pessoa salvar(Pessoa pessoa) throws Exception ;
-    
+    public Boolean validaPeriodoImpressaoTotem(EntityManager em, String cpfCnpj, Integer quantidade) throws Exception;
 }

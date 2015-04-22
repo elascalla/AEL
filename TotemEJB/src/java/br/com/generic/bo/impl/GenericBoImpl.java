@@ -6,10 +6,11 @@
 package br.com.generic.bo.impl;
 
 import br.com.generic.bo.IGenericBoRemote;
-import br.com.generic.dao.IGenericDaoRemote;
-import javax.ejb.EJB;
+import br.com.generic.dao.IGenericDao;
+import br.com.generic.dao.impl.GenericDaoImpl;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
 
 /**
  *
@@ -19,13 +20,12 @@ import javax.ejb.Stateless;
 @Remote(IGenericBoRemote.class)
 public class GenericBoImpl implements IGenericBoRemote {
     
-    @EJB(beanName = "GenericDaoImpl")
-    private IGenericDaoRemote genericDao;
+    private final IGenericDao genericDao = new GenericDaoImpl();
 
     @Override
-    public Object salvar(Object object) {
+    public Object salvar(EntityManager em, Object object) {
         try {
-            return genericDao.salvar(object);
+            return genericDao.salvar(em, object);
         } catch (Exception e) {
             return null;
         }
@@ -33,13 +33,13 @@ public class GenericBoImpl implements IGenericBoRemote {
 
     @Override
     @SuppressWarnings("unchecked")
-    public Object buscarObjetoPorId(Class clazz, Object id) {
-        return genericDao.buscarObjetoPorId(clazz, id);
+    public Object buscarObjetoPorId(EntityManager em, Class clazz, Object id) {
+        return genericDao.buscarObjetoPorId(em, clazz, id);
     }
 
     @Override
-    public Boolean excluir(Object object) {
-        return genericDao.excluir(object);
+    public Boolean excluir(EntityManager em, Object object) {
+        return genericDao.excluir(em, object);
     }
     
 }

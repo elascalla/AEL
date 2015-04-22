@@ -3,15 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.pessoa.entity;
+package br.com.totem.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -27,23 +29,27 @@ public class Pessoa implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @Column(name = "nome")
+    @Column(name = "NOME")
     private String nome;
     
-    @Column(name = "nomsoc")
+    @Column(name = "NOMSOC")
     private String nomeSocial;
     
-    @Column(name = "numcns")
+    @Column(name = "NUNCNS")
     private String numeroCns;
     
-    @Column(name = "datnas")
+    @Column(name = "DATNAS")
     private String dataNascimento;
     
-    @Column(name = "nommae")
+    @Column(name = "NOMMAE")
     private String nomeMae;
     
-    @Column(name = "sexo")
+    @Column(name = "SEXO")
     private String sexo;
+    
+    @Column(name = "DATIMP")
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date dataImpressao;
 
     public Long getId() {
         return id;
@@ -101,7 +107,15 @@ public class Pessoa implements Serializable {
         this.sexo = sexo;
     }
 
-    public Pessoa(Long id, String nome, String nomeSocial, String numeroCns, String dataNascimento, String nomeMae, String sexo) {
+    public Date getDataImpressao() {
+        return dataImpressao;
+    }
+
+    public void setDataImpressao(Date dataImpressao) {
+        this.dataImpressao = dataImpressao;
+    }
+
+    public Pessoa(Long id, String nome, String nomeSocial, String numeroCns, String dataNascimento, String nomeMae, String sexo, Date dataImpressao) {
         this.id = id;
         this.nome = nome;
         this.nomeSocial = nomeSocial;
@@ -109,6 +123,7 @@ public class Pessoa implements Serializable {
         this.dataNascimento = dataNascimento;
         this.nomeMae = nomeMae;
         this.sexo = sexo;
+        this.dataImpressao = dataImpressao;
     }
     
     public Pessoa() {

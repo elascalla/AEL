@@ -3,18 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.pessoa.bo;
+package br.com.totem.bo.impl;
 
-import br.com.pessoa.entity.Pessoa;
-import javax.ejb.Remote;
+import br.com.totem.bo.ITotemBo;
 
 /**
  *
  * @author ericka
  */
-@Remote
-public interface IPessoaBoRemote {
-    
-    public Pessoa salvar(Pessoa pessoa) throws Exception;
+public class TotemBoImpl implements ITotemBo {
     
 }

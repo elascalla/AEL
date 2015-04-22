@@ -6,7 +6,7 @@
 package br.com.ws;
 
 import br.com.generic.service.IGenericServiceRemote;
-import br.com.pessoa.entity.Pessoa;
+import br.com.totem.entity.Pessoa;
 import br.com.totem.entity.Totem;
 import br.com.totem.wrapper.TotemWrapperIn;
 import br.com.totem.wrapper.TotemWrapperOut;
