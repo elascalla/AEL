@@ -12,14 +12,13 @@ import javax.ejb.Remote;
  * @author ericka
  */
 @Remote
-public interface IGenericServiceRemote {
+public interface IGenericService {
     
-    public Object salvar(Object object) throws Exception;
+    public void inclui(Object object) throws Exception;
     
-    public Object buscarObjetoPorId(Class clazz, Object id);
+    public Object altera(Object object) throws Exception;
     
-    public Boolean excluir(Object object);
+    public void exclui(Class classObject, Long idObjectDelete);
     
-    public String msg();
-    
+    public Object recupera(Class clazz, Object id);
 }

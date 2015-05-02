@@ -5,7 +5,7 @@
  */
 package br.com.totem.wrapper;
 
-import br.com.totem.entity.Totem;
+import br.com.totem.entity.Acesso;
 import java.io.Serializable;
 
 /**
@@ -15,6 +15,8 @@ import java.io.Serializable;
  * @author totem-servidor
  */
 public class TotemWrapperIn implements Serializable{
+    
+    private Acesso acesso;
     
     private Sistema sistema;
     
@@ -37,8 +39,6 @@ public class TotemWrapperIn implements Serializable{
     private ModoConsultaEnum modoConsulta; 
     
     private Integer numeroElementos;
-    
-    private Totem totem;
 
     public TotemWrapperIn() {
     }
@@ -47,22 +47,22 @@ public class TotemWrapperIn implements Serializable{
         this.usuario = usuario;
     }
 
-    public TotemWrapperIn(Sistema sistema, Operador operador, Usuario usuario, String nomePesquisa, 
+    public TotemWrapperIn(Acesso acesso, Sistema sistema, Operador operador, Usuario usuario, String nomePesquisa, 
         String nomeMaePesquisa, String nomePaiPesquisa, String dataNascimentoPesquisa, String cpfPesquisa, 
-        String cnsPesquisa, ModoConsultaEnum modoConsulta, Integer numeroElementos, Totem totem) {
+        String cnsPesquisa, ModoConsultaEnum modoConsulta, Integer numeroElementos) {
         
-        this.sistema = sistema;
-        this.operador = operador;
-        this.usuario = usuario;
-        this.nomePesquisa = nomePesquisa;
-        this.nomeMaePesquisa = nomeMaePesquisa;
-        this.nomePaiPesquisa = nomePaiPesquisa;
+        this.acesso                 = acesso;
+        this.sistema                = sistema;
+        this.operador               = operador;
+        this.usuario                = usuario;
+        this.nomePesquisa           = nomePesquisa;
+        this.nomeMaePesquisa        = nomeMaePesquisa;
+        this.nomePaiPesquisa        = nomePaiPesquisa;
         this.dataNascimentoPesquisa = dataNascimentoPesquisa;
-        this.cpfPesquisa = cpfPesquisa;
-        this.cnsPesquisa = cnsPesquisa;
-        this.modoConsulta = modoConsulta;
-        this.numeroElementos = numeroElementos;
-        this.totem = totem;
+        this.cpfPesquisa            = cpfPesquisa;
+        this.cnsPesquisa            = cnsPesquisa;
+        this.modoConsulta           = modoConsulta;
+        this.numeroElementos        = numeroElementos;
     }
 
     public Usuario getUsuario() {
@@ -153,11 +153,11 @@ public class TotemWrapperIn implements Serializable{
         this.operador = operador;
     }
 
-    public Totem getTotem() {
-        return totem;
+    public Acesso getAcesso() {
+        return acesso;
     }
 
-    public void setTotem(Totem totem) {
-        this.totem = totem;
+    public void setAcesso(Acesso acesso) {
+        this.acesso = acesso;
     }
 }

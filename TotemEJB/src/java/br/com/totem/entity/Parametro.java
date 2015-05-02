@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.entidade;
+package br.com.totem.entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -28,8 +28,6 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Parametro.recuperaParametroPorNome", query = "SELECT p FROM Parametro p WHERE p.nome = :nome")
 })
 public class Parametro implements Serializable {
-    
-    private static final long serialVersionUID = 1L;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

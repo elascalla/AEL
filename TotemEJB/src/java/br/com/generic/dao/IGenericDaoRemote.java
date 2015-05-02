@@ -16,6 +16,8 @@ public interface IGenericDaoRemote {
     
     public Object salvar(Object object) throws Exception;
     
+    public Object update(Object object) throws Exception;
+    
     public Object buscarObjetoPorId(Class clazz, Object id);
     
     public Boolean excluir(Object object);

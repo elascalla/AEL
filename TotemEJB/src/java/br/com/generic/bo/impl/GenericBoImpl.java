@@ -7,7 +7,7 @@ package br.com.generic.bo.impl;
 
 import br.com.generic.bo.IGenericBoRemote;
 import br.com.generic.dao.IGenericDaoRemote;
-import javax.ejb.EJB;
+import br.com.generic.dao.impl.GenericDaoImpl;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
@@ -19,8 +19,7 @@ import javax.ejb.Stateless;
 @Remote(IGenericBoRemote.class)
 public class GenericBoImpl implements IGenericBoRemote {
     
-    @EJB(beanName = "GenericDaoImpl")
-    private IGenericDaoRemote genericDao;
+    private final IGenericDaoRemote genericDao = new GenericDaoImpl();
 
     @Override
     public Object salvar(Object object) {

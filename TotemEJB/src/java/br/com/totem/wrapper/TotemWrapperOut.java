@@ -5,7 +5,6 @@
  */
 package br.com.totem.wrapper;
 
-import br.com.pessoa.entity.Pessoa;
 import java.util.Date;
 
 /**
@@ -15,8 +14,6 @@ import java.util.Date;
  * @author totem-servidor
  */
 public class TotemWrapperOut {
-    
-    private Pessoa pessoa;
     
     private Sistema sistema;
     
@@ -46,32 +43,22 @@ public class TotemWrapperOut {
     public TotemWrapperOut(Usuario usuario) {
         this.usuario = usuario;
     }
-    
-    public TotemWrapperOut(Pessoa pessoa) {
-        this.pessoa = pessoa;
-    }
 
-    public TotemWrapperOut(Pessoa pessoa, Sistema sistema, Operador operador, Usuario usuario, String nomePesquisa, String nomeMaePesquisa, String nomePaiPesquisa, Date dataNascimentoPesquisa, String cpfPesquisa, String cnsPesquisa, ModoConsultaEnum modoConsulta, Integer numeroElementos) {
-        this.pessoa = pessoa;
-        this.sistema = sistema;
-        this.operador = operador;
-        this.usuario = usuario;
-        this.nomePesquisa = nomePesquisa;
-        this.nomeMaePesquisa = nomeMaePesquisa;
-        this.nomePaiPesquisa = nomePaiPesquisa;
+    public TotemWrapperOut(Sistema sistema, Operador operador, Usuario usuario, String nomePesquisa, 
+            String nomeMaePesquisa, String nomePaiPesquisa, Date dataNascimentoPesquisa, String cpfPesquisa, 
+            String cnsPesquisa, ModoConsultaEnum modoConsulta, Integer numeroElementos) {
+        
+        this.sistema                = sistema;
+        this.operador               = operador;
+        this.usuario                = usuario;
+        this.nomePesquisa           = nomePesquisa;
+        this.nomeMaePesquisa        = nomeMaePesquisa;
+        this.nomePaiPesquisa        = nomePaiPesquisa;
         this.dataNascimentoPesquisa = dataNascimentoPesquisa;
-        this.cpfPesquisa = cpfPesquisa;
-        this.cnsPesquisa = cnsPesquisa;
-        this.modoConsulta = modoConsulta;
-        this.numeroElementos = numeroElementos;
-    }
-
-    public Pessoa getPessoa() {
-        return pessoa;
-    }
-
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
+        this.cpfPesquisa            = cpfPesquisa;
+        this.cnsPesquisa            = cnsPesquisa;
+        this.modoConsulta           = modoConsulta;
+        this.numeroElementos        = numeroElementos;
     }
 
     public Usuario getUsuario() {

@@ -12,8 +12,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -23,35 +21,36 @@ import javax.persistence.TemporalType;
  * @author Andre
  */
 @Entity
-@Table(name = "TB_ACESSO")
-@NamedQueries({
-    @NamedQuery(name = "Acesso.recuperaAcessoPorHashAndChave", query = "SELECT a FROM Acesso a WHERE a.hash = :hash AND a.chave = :chave")
-})
-public class Acesso implements Serializable {
+@Table(name = "TB_FALHA")
+public class Falha implements Serializable {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(name = "HASH")
-    private Integer hash;
-
     @Column(name = "CHAVE")
     private String chave;
+
+    @Column(name = "MENSAGEM")
+    private String mensagem;
     
-    @Column(name = "DATA_ACESSO")
+    @Column(name = "STACK_TRACE")
+    private String stackTrace;
+    
+    @Column(name = "DATA_FALHA")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date dataAcesso;
+    private Date dataFalha;
     
-    public Acesso() {
+    public Falha() {
     }
 
-    public Acesso(Integer hash, String chave, Date dataAcesso) {
-        this.hash       = hash;
+    public Falha(String chave, String mensagem, String stackTrace, Date dataFalha) {
         this.chave      = chave;
-        this.dataAcesso = dataAcesso;
+        this.mensagem   = mensagem;
+        this.stackTrace = stackTrace;
+        this.dataFalha  = dataFalha;
     }
-    
+
     public Long getId() {
         return id;
     }
@@ -68,20 +67,28 @@ public class Acesso implements Serializable {
         this.chave = chave;
     }
 
-    public Integer getHash() {
-        return hash;
+    public String getMensagem() {
+        return mensagem;
     }
 
-    public void setHash(Integer hash) {
-        this.hash = hash;
+    public void setMensagem(String mensagem) {
+        this.mensagem = mensagem;
     }
 
-    public Date getDataAcesso() {
-        return dataAcesso;
+    public String getStackTrace() {
+        return stackTrace;
     }
 
-    public void setDataAcesso(Date dataAcesso) {
-        this.dataAcesso = dataAcesso;
+    public void setStackTrace(String stackTrace) {
+        this.stackTrace = stackTrace;
+    }
+
+    public Date getDataFalha() {
+        return dataFalha;
+    }
+
+    public void setDataFalha(Date dataFalha) {
+        this.dataFalha = dataFalha;
     }
 
     @Override
@@ -94,10 +101,10 @@ public class Acesso implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Acesso)) {
+        if (!(object instanceof Falha)) {
             return false;
         }
-        Acesso other = (Acesso) object;
+        Falha other = (Falha) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -106,6 +113,6 @@ public class Acesso implements Serializable {
 
     @Override
     public String toString() {
-        return "br.com.entidade.TabelaAcesso[ id=" + id + " ]";
+        return "br.com.entidade.Falha[ id=" + id + " ]";
     }
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.pessoa.entity;
+package br.com.totem.entity;
 
 import java.io.Serializable;
 import javax.persistence.Column;
@@ -20,8 +20,6 @@ import javax.persistence.Table;
 @Table(name = "TBLPES")
 @Entity
 public class Pessoa implements Serializable {
-    
-    private static final long serialVersionUID = 1L;
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
