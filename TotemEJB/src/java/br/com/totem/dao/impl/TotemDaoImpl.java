@@ -26,12 +26,12 @@ public class TotemDaoImpl implements ITotemDao {
             Pessoa pessoa = (Pessoa) em.find(Pessoa.class, cpfCnpj);
             
             if(pessoa != null){
-                Long dias = TotemUtil.quantidadeDiasAtual(pessoa.getDataImpressao());
-                if(dias <= 360){
-                    return Boolean.FALSE;
-                }else{
-                    return Boolean.TRUE;
-                }
+//                Long dias = TotemUtil.quantidadeDiasAtual(pessoa.getDataImpressao());
+//                if(dias <= 360){
+//                    return Boolean.FALSE;
+//                }else{
+//                    return Boolean.TRUE;
+//                }
             }
         }
         
