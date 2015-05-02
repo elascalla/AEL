@@ -63,8 +63,6 @@ public class TotemServidor {
         try{
             
             log.info("Cliente {0}:", wrapperIn.getUsuario().getNome());
-            
-            System.out.println("Cliente " + wrapperIn.getUsuario().getNome());
 
             /** Segurança Acesso **/
             checaAcessoSeguranca(wrapperIn);

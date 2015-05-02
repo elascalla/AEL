@@ -7,12 +7,8 @@ package br.com.generic.dao.impl;
 
 import br.com.generic.dao.IGenericDao;
 import br.com.generic.entity.EntityManagerUtil;
-import javax.ejb.Remote;
-import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
-import javax.ejb.TransactionManagement;
-import javax.ejb.TransactionManagementType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -20,9 +16,9 @@ import javax.persistence.PersistenceContext;
  *
  * @author ericka
  */
-@Stateless
-@Remote(IGenericDao.class)
-@TransactionManagement(TransactionManagementType.CONTAINER)
+//@Stateless
+//@Remote(IGenericDao.class)
+//@TransactionManagement(TransactionManagementType.CONTAINER)
 public class GenericDaoImpl implements IGenericDao {
     
     @PersistenceContext(unitName = "totemPU")
