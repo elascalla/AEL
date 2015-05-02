@@ -5,7 +5,7 @@
     <client name="TotemServidor">
       <wsdl-url>http://localhost:8080/totem-servidor/TotemServidor?wsdl</wsdl-url>
       <local-wsdl-file>localhost_8080/totem-servidor/TotemServidor.wsdl</local-wsdl-file>
-      <package-name>br.com.ws</package-name>
+      <package-name forceReplace="true">br.com.ws.servidor</package-name>
       <catalog-file>catalog.xml</catalog-file>
       <wsimport-options>
         <wsimport-option>
@@ -31,6 +31,10 @@
         <wsimport-option>
           <wsimport-option-name>xendorsed</wsimport-option-name>
           <wsimport-option-value>true</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>package</wsimport-option-name>
+          <wsimport-option-value>br.com.ws.servidor</wsimport-option-value>
         </wsimport-option>
       </wsimport-options>
     </client>

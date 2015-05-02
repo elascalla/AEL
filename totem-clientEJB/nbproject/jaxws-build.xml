@@ -21,7 +21,7 @@
     <target name="wsimport-client-TotemServidor" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/TotemServidor"/>
         <property name="wsdl-TotemServidor" location="${meta.inf}/xml-resources/web-service-references/TotemServidor/wsdl/localhost_8080/totem-servidor/TotemServidor.wsdl"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/TotemServidor" destdir="${build.generated.dir}/jax-wsCache/TotemServidor" wsdl="${wsdl-TotemServidor}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/totem-servidor/TotemServidor?wsdl" xnocompile="true" xendorsed="true">
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/TotemServidor" destdir="${build.generated.dir}/jax-wsCache/TotemServidor" wsdl="${wsdl-TotemServidor}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/totem-servidor/TotemServidor?wsdl" xnocompile="true" xendorsed="true" package="br.com.ws.servidor">
             <depends file="${wsdl-TotemServidor}"/>
             <produces dir="${build.generated.dir}/jax-wsCache/TotemServidor"/>
         </wsimport>
@@ -33,7 +33,7 @@
     </target>
     <target name="wsimport-client-clean-TotemServidor" depends="-init-project">
         <delete dir="${build.generated.dir}/jax-wsCache/TotemServidor"/>
-        <delete dir="${build.generated.sources.dir}/jax-ws/br/com/ws"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/br/com/ws/servidor"/>
     </target>
     <target name="wsimport-client-generate" depends="wsimport-client-TotemServidor"/>
 </project>

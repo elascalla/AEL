@@ -5,13 +5,13 @@
  */
 package totemclientejb;
 
-import br.com.generic.service.IGenericServiceRemote;
+import br.com.generic.service.IGenericService;
 import br.com.totem.entity.Acesso;
-import br.com.ws.ObjectFactory;
-import br.com.ws.TotemServidor_Service;
-import br.com.ws.TotemWrapperOut;
-import br.com.ws.TotemWrapperIn;
-import br.com.ws.Usuario;
+import br.com.ws.servidor.ObjectFactory;
+import br.com.ws.servidor.TotemServidor_Service;
+import br.com.ws.servidor.TotemWrapperIn;
+import br.com.ws.servidor.TotemWrapperOut;
+import br.com.ws.servidor.Usuario;
 import java.util.Calendar;
 import javax.ejb.EJB;
 
@@ -24,7 +24,7 @@ public class Main {
 //    @EJB(lookup = "ejb/IGenericServiceRemote", name = "IGenericServiceRemote")
 //    private static IGenericServiceRemote service;
     @EJB
-    private static IGenericServiceRemote service;
+    private static IGenericService service;
 
     /**
      * @param args the command line arguments
@@ -44,7 +44,7 @@ public class Main {
         
 //        iTotemService = (ITotemService) ic.lookup("java:global/TotemEJB/TotemService");
         System.out.println("TESTE EJB OK !");
-        service.msg();
+//        service.msg();
         
         try{
             
@@ -61,9 +61,9 @@ public class Main {
             tabelaAcesso.setChave("TOTEM_SERVIDOR_1");
             tabelaAcesso.setDataAcesso(Calendar.getInstance().getTime());
             
-            service.salvar(tabelaAcesso);
+//            service.salvar(tabelaAcesso);
             
-            TotemWrapperOut totemOut = new TotemServidor_Service().getTotemServidorPort().totemUsuarioObj(usuarioWrapper);
+//            TotemWrapperOut totemOut = new TotemServidor_Service().getTotemServidorPort().totemUsuarioObj(usuarioWrapper);
             
         } catch(Exception ex){
             ex.printStackTrace();

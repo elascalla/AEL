@@ -5,15 +5,14 @@
  */
 package br.com.ws;
 
-import br.com.generic.service.IGenericServiceRemote;
-import br.com.pessoa.entity.Pessoa;
-import br.com.totem.entity.Totem;
+import br.com.generic.service.IGenericService;
+import br.com.totem.entity.Acesso;
+import br.com.totem.service.ITotemService;
+import br.com.totem.wrapper.FalhaWrapper;
 import br.com.totem.wrapper.TotemWrapperIn;
 import br.com.totem.wrapper.TotemWrapperOut;
-import br.gov.datasus.cobdn.cadsus.municipal.componente.webService.Rsp;
-import br.gov.datasus.cobdn.cadsus.municipal.componente.webService.RspConsultaUsuario;
-import br.gov.datasus.cobdn.cadsus.municipal.componente.webService.ServidorWsCadsusCobdn;
-import br.gov.datasus.cobdn.cadsus.municipal.componente.webService.ServidorWsCadsusCobdn_Service;
+import br.com.totem.wrapper.Usuario;
+import br.com.util.TotemUtil;
 import javax.ejb.EJB;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
@@ -23,161 +22,176 @@ import org.apache.logging.log4j.Logger;
 
 /**
  *
- * WebService responsavel por receber uma requisicao do cliente ( Totem Desktop
- * ).
- *
- * Duas situações de responsabilidade: 1 - Comsumir requisicao e gerenciar a
- * producao de dados para integracao entre totem-servidor -> CadSus 2 - Produzir
- * a integracao de retorno para o Totem Desktop.
- *
- *
+ * WebService responsavel por receber uma requisicao do cliente ( Totem Desktop ).
+ * 
+ * Duas situações de responsabilidade:
+ *  1 - Comsumir requisicao e gerenciar a producao de dados para integracao entre totem-servidor -> CadSus
+ *  2 - Produzir a integracao de retorno para o Totem Desktop.
+ * 
+ * 
  * @author totem-servidor
  */
 @WebService(serviceName = "TotemServidor")
 public class TotemServidor {
-
+    
     private static final Logger log = LogManager.getLogger(TotemServidor.class.getName());
 
     @EJB
-    private IGenericServiceRemote iGenericServiceRemote;
-
+    private IGenericService iGenericService;
+    
+    @EJB
+    private ITotemService iTotemService;
+    
+    /** http://localhost:8080/totem-servidor/TotemServidor?WSDL **/
+    
+    /** Netbeans fornece um test para o WSDL, clicar no WS e 'Test Web Service' **/
+    
     /**
-     * http://localhost:8080/totem-servidor/TotemServidor?WSDL *
+     * 
+     * Método WS -> Consumidor de integração TOTEM.
+     * 
+     * @param wrapperIn
+     * @return 
      */
-    /**
-     * Netbeans fornece um test para o WSDL, clicar no WS e 'Test Web Service' *
-     */
-    /**
-     *
-     * @param wrapper
-     * @return
-     */
-    @WebMethod(operationName = "totemUsuarioObj")
-    public TotemWrapperOut totemUsuarioObj(@WebParam(name = "parameterObj") TotemWrapperIn wrapper) {
+    @WebMethod(operationName = "integraTotem")
+    public TotemWrapperOut integraTotem(@WebParam(name = "totem") TotemWrapperIn wrapperIn) {
+        
+        log.info("Início WS - integraTotem.");
+        
+        TotemWrapperOut wrapperOut = null;
+        
+        try{
+            
+            log.info("Cliente {0}:", wrapperIn.getUsuario().getNome());
+            
+            System.out.println("Cliente " + wrapperIn.getUsuario().getNome());
 
-        try {
-
-            if (wrapper != null) {
-
-                if (valida(wrapper)) {
-
-                    log.info("Parâmetro entrada: " + wrapper.getNomePesquisa());
-
-                    ServidorWsCadsusCobdn_Service service = new ServidorWsCadsusCobdn_Service();
-                    ServidorWsCadsusCobdn port = service.getServidorWsCadsusCobdnPort();
-
-                    RspConsultaUsuario result = null;
-                    
-                    if(wrapper.getSistema() != null 
-                            && wrapper.getUsuario() != null 
-                            && wrapper.getOperador() != null){
-                        
-                        result = port.consultar(wrapper.getSistema().getUsuario(),
-                            wrapper.getSistema().getSenha(),
-                            wrapper.getSistema().getCodigo(),
-                            wrapper.getSistema().getBanco(),
-                            wrapper.getSistema().getIbge(),
-                            wrapper.getUsuario().getNome(),
-                            wrapper.getUsuario().getSenha(),
-                            wrapper.getOperador().getCns(),
-                            wrapper.getOperador().getSenha(),
-                            wrapper.getNomePesquisa(),
-                            wrapper.getNomeMaePesquisa(),
-                            wrapper.getNomePaiPesquisa(),
-                            wrapper.getDataNascimentoPesquisa(),
-                            wrapper.getCpfPesquisa(),
-                            wrapper.getCnsPesquisa(),
-                            wrapper.getModoConsulta().getCodigo(),
-                            wrapper.getNumeroElementos());
-                    }
-
-                    Pessoa pessoa = null;
-
-                    if (result != null
-                            && result.getPessoas() != null
-                            && !result.getPessoas().isEmpty()) {
-                        pessoa = new Pessoa();
-                        pessoa.setNome(result.getPessoas().get(0).getNome());
-                        pessoa.setNomeSocial(result.getPessoas().get(0).getNomeSocial());
-                        pessoa.setNumeroCns(result.getPessoas().get(0).getNumeroCns());
-                        pessoa.setNomeMae(result.getPessoas().get(0).getNomeMae());
-                        pessoa.setDataNascimento(result.getPessoas().get(0).getDataNascimento());
-                        pessoa.setSexo(result.getPessoas().get(0).getSexo());
-                    }
-
-                    if(pessoa != null){
-                        
-                        try {
-                            iGenericServiceRemote.salvar(pessoa);
-                        } catch (Exception e) {
-
-                            log.error("Falha capturada.", e);
-                        }
-
-                        return new TotemWrapperOut(pessoa);
-                    }
-                }
-            }
-
-        } catch (Exception ex) {
+            /** Segurança Acesso **/
+            checaAcessoSeguranca(wrapperIn);
+            
+            /** Restrição **/
+            validaTotemWrapperIn(wrapperIn);
+                
+            /** 
+             * 
+             * 1 -> Integra CadSus 4.5 
+             * 2 -> Gera instância resposta WS
+             * 
+             **/
+            wrapperOut = geraRespostaParaTotem(wrapperIn, invocaIntegracaoCadSus(wrapperIn));
+                
+        }catch(Exception ex){
+            
             log.error("Falha capturada.", ex);
+            iTotemService.registrarFalha(new FalhaWrapper(wrapperIn, wrapperOut, "FALHA EXECUÇÃO", "FALHA CAPTURADA", ex));
         } finally {
-            if(wrapper.getTotem() != null && wrapper.getTotem().getId() != null){
-                iGenericServiceRemote.excluir(wrapper.getTotem().getId());
-            }
+            
+            /** Remove Acesso **/
+            removeAcessoPorHashAndChave(wrapperIn.getAcesso());
         }
-
-        return null;
+        
+        log.info("Fim WS - integraTotem.");
+        
+        return wrapperOut;
     }
 
-    @WebMethod(operationName = "testaConexaoWS")
-    public Boolean testaConexaoWS(@WebParam(name = "parameterObj") TotemWrapperIn wrapper) {
-
-        try {
-
-            ServidorWsCadsusCobdn_Service service = new ServidorWsCadsusCobdn_Service();
-            ServidorWsCadsusCobdn port = service.getServidorWsCadsusCobdnPort();
-
-            if (wrapper != null) {
-                Rsp resp = port.testaConexao(wrapper.getSistema().getUsuario(),
-                        wrapper.getSistema().getSenha(),
-                        wrapper.getSistema().getCodigo(),
-                        wrapper.getSistema().getBanco(),
-                        wrapper.getSistema().getIbge(),
-                        wrapper.getUsuario().getNome(),
-                        wrapper.getUsuario().getSenha(),
-                        wrapper.getOperador().getCns(),
-                        wrapper.getOperador().getSenha());
-
-                if (resp != null && resp.getStatus() == 1) {
-                    return Boolean.TRUE;
-                }
-            }
-        } catch (Exception e) {
-            log.error("Falha capturada.", e);
+    /**
+     * 
+     * @param wrapperIn
+     * @throws Exception 
+     */
+    private void checaAcessoSeguranca(TotemWrapperIn wrapperIn) throws Exception {
+        
+        if(wrapperIn == null){
+            throw new Exception("Falha ao tentar consultar cadastro.");
         }
-
-        return Boolean.FALSE;
+        
+        /** Valida Dados Acesso | Segurança **/
+        if(wrapperIn.getAcesso() == null || TotemUtil.ehBrancoOrNulo(wrapperIn.getAcesso().getChave()) || wrapperIn.getAcesso().getHash() == null){
+            throw new Exception("Acesso inválido. Informações obrigatórias.");
+        }
+        
+        /** Recupera Acesso para Hash | Chave recebidos **/
+        Acesso acesso = recuperaAcessoPorHashAndChave(wrapperIn.getAcesso().getHash(), wrapperIn.getAcesso().getChave());
+        
+        if(acesso == null){
+            throw new Exception("Acesso inválido.");
+        }
+        
+        wrapperIn.setAcesso(acesso);
     }
 
-    private Boolean valida(TotemWrapperIn wrapper) {
+    /**
+     * 
+     * @param wrapperIn
+     * @return 
+     */
+    private Object invocaIntegracaoCadSus(TotemWrapperIn wrapperIn) {
+        return new Object();
+    }
 
-        if (wrapper != null) {
+    /**
+     * 
+     * @param outCadSus
+     * @return
+     * @throws Exception 
+     */
+    private TotemWrapperOut geraRespostaParaTotem(TotemWrapperIn wrapperIn, Object outCadSus) throws Exception {
+        
+        validaIntegracaoCadSus(outCadSus);
+        
+        return new TotemWrapperOut(new Usuario(wrapperIn.getNomePesquisa() + " - " + wrapperIn.getUsuario().getNome()));
+    }
 
-            Object obj = null;
-            
-            if(wrapper.getTotem() != null 
-                    && wrapper.getTotem().getId() != null){
-                obj = iGenericServiceRemote.buscarObjetoPorId(Totem.class, wrapper.getTotem().getId());
-            }else{
-                return Boolean.TRUE;
-            }
-            
-            if (obj != null) {
-                return Boolean.TRUE;
-            }
+    /**
+     * 
+     * Responsável por validar informações recebidas para integração.
+     * 
+     * @param wrapperIn
+     * @throws Exception 
+     */
+    private void validaTotemWrapperIn(TotemWrapperIn wrapperIn) throws Exception {
+        
+        if(wrapperIn == null){
+            throw new Exception("Falha ao tentar consultar cadastro.");
         }
+        
+        if(TotemUtil.ehBrancoOrNulo(wrapperIn.getNomePesquisa())){
+            throw new Exception("Obrigatório informar Nome.");
+        }
+        
+        if(TotemUtil.ehBrancoOrNulo(wrapperIn.getDataNascimentoPesquisa())){
+            throw new Exception("Obrigatório informar Data Nascimento.");
+        }
+    }
+    
+    /**
+     * 
+     * @param hash
+     * @param chave
+     * @return 
+     */
+    private Acesso recuperaAcessoPorHashAndChave(Integer hash, String chave) throws Exception {
+        return iTotemService.recuperaAcessoPorHashAndChave(hash, chave);
+    }
 
-        return Boolean.FALSE;
+    /**
+     * 
+     * @param acesso 
+     */
+    private void removeAcessoPorHashAndChave(Acesso acesso) {
+        iGenericService.exclui(acesso.getClass(), acesso.getId());
+    }
+
+    /**
+     * 
+     * @param outCadSus
+     * @throws Exception 
+     */
+    private void validaIntegracaoCadSus(Object outCadSus) throws Exception {
+        
+        if(outCadSus == null){
+            throw new Exception("Falha inesperada. CadSus falhou.");
+        }
     }
 }

@@ -1,21 +1,18 @@
-<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is Metro/2.3 (tags/2.3-7528; 2013-04-29T19:34:10+0000) JAXWS-RI/2.2.8 JAXWS/2.2 svn-revision#unknown. --><xs:schema xmlns:tns="http://ws.com.br/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://ws.com.br/">
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.1-b419 (branches/2.3.1.x-7937; 2014-08-04T08:11:03+0000) JAXWS-RI/2.2.10-b140803.1500 JAXWS-API/2.2.11 JAXB-RI/2.2.10-b140802.1033 JAXB-API/2.2.12-b140109.1041 svn-revision#unknown. --><xs:schema xmlns:tns="http://ws.com.br/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://ws.com.br/">
 
-<xs:element name="testaConexaoWS" type="tns:testaConexaoWS"/>
+<xs:element name="integraTotem" type="tns:integraTotem"/>
 
-<xs:element name="testaConexaoWSResponse" type="tns:testaConexaoWSResponse"/>
+<xs:element name="integraTotemResponse" type="tns:integraTotemResponse"/>
 
-<xs:element name="totemUsuarioObj" type="tns:totemUsuarioObj"/>
-
-<xs:element name="totemUsuarioObjResponse" type="tns:totemUsuarioObjResponse"/>
-
-<xs:complexType name="testaConexaoWS">
+<xs:complexType name="integraTotem">
 <xs:sequence>
-<xs:element name="parameterObj" type="tns:totemWrapperIn" minOccurs="0"/>
+<xs:element name="totem" type="tns:totemWrapperIn" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="totemWrapperIn">
 <xs:sequence>
+<xs:element name="acesso" type="tns:acesso" minOccurs="0"/>
 <xs:element name="cnsPesquisa" type="xs:string" minOccurs="0"/>
 <xs:element name="cpfPesquisa" type="xs:string" minOccurs="0"/>
 <xs:element name="dataNascimentoPesquisa" type="xs:string" minOccurs="0"/>
@@ -26,8 +23,16 @@
 <xs:element name="numeroElementos" type="xs:int" minOccurs="0"/>
 <xs:element name="operador" type="tns:operador" minOccurs="0"/>
 <xs:element name="sistema" type="tns:sistema" minOccurs="0"/>
-<xs:element name="totem" type="tns:totem" minOccurs="0"/>
 <xs:element name="usuario" type="tns:usuario" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="acesso">
+<xs:sequence>
+<xs:element name="chave" type="xs:string" minOccurs="0"/>
+<xs:element name="dataAcesso" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="hash" type="xs:int" minOccurs="0"/>
+<xs:element name="id" type="xs:long" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -48,13 +53,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="totem">
-<xs:sequence>
-<xs:element name="id" type="xs:long" minOccurs="0"/>
-<xs:element name="ipTotem" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="usuario">
 <xs:sequence>
 <xs:element name="nome" type="xs:string" minOccurs="0"/>
@@ -62,19 +60,7 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="testaConexaoWSResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:boolean" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="totemUsuarioObj">
-<xs:sequence>
-<xs:element name="parameterObj" type="tns:totemWrapperIn" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="totemUsuarioObjResponse">
+<xs:complexType name="integraTotemResponse">
 <xs:sequence>
 <xs:element name="return" type="tns:totemWrapperOut" minOccurs="0"/>
 </xs:sequence>
@@ -91,21 +77,8 @@
 <xs:element name="nomePesquisa" type="xs:string" minOccurs="0"/>
 <xs:element name="numeroElementos" type="xs:int" minOccurs="0"/>
 <xs:element name="operador" type="tns:operador" minOccurs="0"/>
-<xs:element name="pessoa" type="tns:pessoa" minOccurs="0"/>
 <xs:element name="sistema" type="tns:sistema" minOccurs="0"/>
 <xs:element name="usuario" type="tns:usuario" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="pessoa">
-<xs:sequence>
-<xs:element name="dataNascimento" type="xs:string" minOccurs="0"/>
-<xs:element name="id" type="xs:long" minOccurs="0"/>
-<xs:element name="nome" type="xs:string" minOccurs="0"/>
-<xs:element name="nomeMae" type="xs:string" minOccurs="0"/>
-<xs:element name="nomeSocial" type="xs:string" minOccurs="0"/>
-<xs:element name="numeroCns" type="xs:string" minOccurs="0"/>
-<xs:element name="sexo" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
