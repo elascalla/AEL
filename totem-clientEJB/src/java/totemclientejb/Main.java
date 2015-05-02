@@ -58,8 +58,9 @@ public class Main {
             
             Acesso tabelaAcesso = new Acesso();
             tabelaAcesso.setHash(usuarioWrapper.hashCode());
-            tabelaAcesso.setChave("TOTEM_SERVIDOR_1");
+            tabelaAcesso.setChave("TOTEM_SERVIDOR_2");
             tabelaAcesso.setDataAcesso(Calendar.getInstance().getTime());
+//            tabelaAcesso.setId(new Long(1));
             
 //            service.salvar(tabelaAcesso);
             

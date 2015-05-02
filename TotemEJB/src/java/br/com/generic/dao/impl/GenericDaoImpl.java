@@ -14,7 +14,6 @@ import javax.ejb.TransactionAttributeType;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 /**
  *

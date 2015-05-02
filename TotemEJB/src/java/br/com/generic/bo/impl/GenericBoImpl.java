@@ -10,6 +10,7 @@ import br.com.generic.dao.IGenericDaoRemote;
 import br.com.generic.dao.impl.GenericDaoImpl;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
 
 /**
  *
@@ -22,9 +23,9 @@ public class GenericBoImpl implements IGenericBoRemote {
     private final IGenericDaoRemote genericDao = new GenericDaoImpl();
 
     @Override
-    public Object salvar(Object object) {
+    public Object salvar(EntityManager em, Object object) {
         try {
-            return genericDao.salvar(object);
+            return genericDao.salvar(em, object);
         } catch (Exception e) {
             return null;
         }
@@ -32,13 +33,13 @@ public class GenericBoImpl implements IGenericBoRemote {
 
     @Override
     @SuppressWarnings("unchecked")
-    public Object buscarObjetoPorId(Class clazz, Object id) {
-        return genericDao.buscarObjetoPorId(clazz, id);
+    public Object buscarObjetoPorId(EntityManager em, Class clazz, Object id) {
+        return genericDao.buscarObjetoPorId(em, clazz, id);
     }
 
     @Override
-    public Boolean excluir(Object object) {
-        return genericDao.excluir(object);
+    public Boolean excluir(EntityManager em, Object object) {
+        return genericDao.excluir(em, object);
     }
     
 }
