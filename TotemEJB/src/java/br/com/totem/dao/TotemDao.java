@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.totem.dao.impl;
+package br.com.totem.dao;
 
-import br.com.totem.dao.ITotemDao;
 import br.com.totem.entity.Pessoa;
 import br.com.util.TotemUtil;
 import javax.persistence.EntityManager;
@@ -14,9 +13,8 @@ import javax.persistence.EntityManager;
  *
  * @author ericka
  */
-public class TotemDaoImpl implements ITotemDao {
+public class TotemDao {
     
-    @Override
     public Boolean validaPeriodoImpressaoTotem(EntityManager em, String cpfCnpj, Integer quantidade) throws Exception {
         
         if(em != null 

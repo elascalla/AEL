@@ -47,7 +47,7 @@ public class TotemUtil {
                 d2 = Calendar.getInstance().getTime();
                 
         } catch (java.text.ParseException evt ) {
-            evt.printStackTrace();
+            log.error("Ocorreu erro inesperado.", evt);
         }  
         
         long dt = (d2.getTime() - d1.getTime()) + 3600000;        

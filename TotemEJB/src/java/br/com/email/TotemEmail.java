@@ -30,7 +30,7 @@ public class TotemEmail {
 //    private static ITotemService iTotemService;
 
     private static final String USERNAME = "totemsuporte@laulettaepereira.com.br";   /** Pegar do Parametro**/
-    private static final String PASSWORD = "totem1234";                      /** Pegar do Parametro**/
+    private static final String PASSWORD = "totem1234";                              /** Pegar do Parametro**/
 
     private static final String FROM    = "totemsuporte@laulettaepereira.com.br";    /** Pegar do Parametro**/
     private static final String TO      = "totemsuporte@laulettaepereira.com.br";    /** Pegar do Parametro**/
