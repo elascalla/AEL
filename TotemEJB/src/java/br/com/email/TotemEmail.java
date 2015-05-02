@@ -26,9 +26,6 @@ public class TotemEmail {
 
     private static final Logger log = LogManager.getLogger(TotemEmail.class.getName());
     
-//    @EJB
-//    private static ITotemService iTotemService;
-
     private static final String USERNAME = "totemsuporte@laulettaepereira.com.br";   /** Pegar do Parametro**/
     private static final String PASSWORD = "totem1234";                              /** Pegar do Parametro**/
 

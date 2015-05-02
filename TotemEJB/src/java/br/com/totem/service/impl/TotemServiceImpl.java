@@ -30,7 +30,7 @@ import org.apache.logging.log4j.Logger;
 @Remote(ITotemService.class)
 public class TotemServiceImpl implements ITotemService {
     
-    private static final Logger log = LogManager.getLogger(GenericServiceImpl.class);
+    private static final Logger log = LogManager.getLogger(TotemServiceImpl.class);
     
     @PersistenceContext(unitName = "totemPU")
     private EntityManager em;
