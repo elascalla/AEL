@@ -29,18 +29,17 @@ public class TotemEmail {
 //    @EJB
 //    private static ITotemService iTotemService;
 
-    private String erick2;
-    private static final String USERNAME = "andrevmdb@gmail.com";   /** Pegar do Parametro**/
-    private static final String PASSWORD = "";                      /** Pegar do Parametro**/
+    private static final String USERNAME = "totemsuporte@laulettaepereira.com.br";   /** Pegar do Parametro**/
+    private static final String PASSWORD = "totem1234";                      /** Pegar do Parametro**/
 
-    private static final String FROM    = "andrevmdb@gmail.com";    /** Pegar do Parametro**/
-    private static final String TO      = "andrevmdb@gmail.com";    /** Pegar do Parametro**/
+    private static final String FROM    = "totemsuporte@laulettaepereira.com.br";    /** Pegar do Parametro**/
+    private static final String TO      = "totemsuporte@laulettaepereira.com.br";    /** Pegar do Parametro**/
 
     public static void main(String[] args) throws Exception {
 
-//        envioTLS(new TotemEmailWrapper("Erro Totem Desktop 1 ", "Erro grave 1", "Pane Sistema 1"));
+        envioTLS(new TotemEmailWrapper("Erro Totem Desktop 1 ", "Erro grave 1", "Pane Sistema 1"));
         
-        envioSSL(new TotemEmailWrapper("Erro Totem Desktop 2", "Erro grave 2", "Pane Sistema 2"));
+//        envioSSL(new TotemEmailWrapper("Erro Totem Desktop 2", "Erro grave 2", "Pane Sistema 2"));
     }
     
     public static void enviaEmail(TotemEmailWrapper wrapper){
@@ -59,8 +58,8 @@ public class TotemEmail {
         Properties props = new Properties();
 
         props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", "smtp.gmail.com");
+//        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.laulettaepereira.com.br");
         props.put("mail.smtp.port", "587");
 
         Session session = Session.getInstance(props,
@@ -113,7 +112,7 @@ public class TotemEmail {
     private static void envioSSL(TotemEmailWrapper wrapper) throws Exception {
 
         Properties props = new Properties();
-        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.host", "smtp.laulettaepereira.com.br");
         props.put("mail.smtp.socketFactory.port", "465");
         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         props.put("mail.smtp.auth", "true");

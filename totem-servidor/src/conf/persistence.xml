@@ -10,7 +10,6 @@
     <class>br.com.totem.entity.Totem</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
-      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
       <property name="eclipselink.ddl-generation.output-mode" value="database"/>
     </properties>
   </persistence-unit>
