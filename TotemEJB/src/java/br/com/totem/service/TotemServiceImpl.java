@@ -12,7 +12,7 @@ import br.com.totem.dao.ParametroDao;
 import br.com.totem.entity.Acesso;
 import br.com.totem.entity.Parametro;
 import br.com.totem.wrapper.FalhaWrapper;
-import br.com.wrapper.TotemEmailWrapper;
+import br.com.totem.wrapper.TotemEmailWrapper;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -152,6 +152,22 @@ public class TotemServiceImpl implements ITotemService {
         new FalhaDao().registrarFalha(em, falhaWrapper);
         
         /** Email **/
-        TotemEmail.envia(new TotemEmailWrapper("Falha Capturada", falhaWrapper.getMensagem(), falhaWrapper.getStackTrace()));
+        try{
+            
+            TotemEmailWrapper wrapper = new TotemEmailWrapper("Falha Capturada", falhaWrapper.getMensagem(), falhaWrapper.getStackTrace());
+
+            ParametroDao parametroDao = new ParametroDao();
+
+            wrapper.setUsername(parametroDao.recuperaParametroPorNome(em, "EMAIL_USERNAME").getValor());
+            wrapper.setPassword(parametroDao.recuperaParametroPorNome(em, "EMAIL_PASSWORD").getValor());
+            wrapper.setFrom(parametroDao.recuperaParametroPorNome(em, "EMAIL_FROM").getValor());
+            wrapper.setTo(parametroDao.recuperaParametroPorNome(em, "EMAIL_TO").getValor());
+            wrapper.setCc(parametroDao.recuperaParametroPorNome(em, "EMAIL_CC").getValor());
+
+            TotemEmail.envia(wrapper);
+        
+        } catch(Exception e) {
+            log.error("Falha ao enviar email.", e);
+        }
     }   
 }

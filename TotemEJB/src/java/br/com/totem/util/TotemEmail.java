@@ -5,7 +5,8 @@
  */
 package br.com.totem.util;
 
-import br.com.wrapper.TotemEmailWrapper;
+import br.com.totem.dao.ParametroDao;
+import br.com.totem.wrapper.TotemEmailWrapper;
 import java.util.Calendar;
 import java.util.Properties;
 import javax.mail.Message;
@@ -25,16 +26,18 @@ import org.apache.logging.log4j.Logger;
 public class TotemEmail {
 
     private static final Logger log = LogManager.getLogger(TotemEmail.class.getName());
-    
-    private static final String USERNAME = "totemsuporte@laulettaepereira.com.br";   /** Pegar do Parametro**/
-    private static final String PASSWORD = "totem1234";                              /** Pegar do Parametro**/
-
-    private static final String FROM    = "totemsuporte@laulettaepereira.com.br";    /** Pegar do Parametro**/
-    private static final String TO      = "totemsuporte@laulettaepereira.com.br";    /** Pegar do Parametro**/
 
     public static void main(String[] args) throws Exception {
 
-        envioTLS(new TotemEmailWrapper("Erro Totem Desktop 1 ", "Erro grave 1", "Pane Sistema 1"));
+        TotemEmailWrapper wrapper = new TotemEmailWrapper("Falha Capturada", "Falha Capturada - Ajustar", "Erro GRAVE - PANE");
+
+        wrapper.setUsername("totemsuporte@laulettaepereira.com.br");
+        wrapper.setPassword("totem1234");
+        wrapper.setFrom("totemsuporte@laulettaepereira.com.br");
+        wrapper.setTo("totemsuporte@laulettaepereira.com.br");
+        wrapper.setCc("andrevmdb@gmail.com,erick.lascalla@gmail.com,leandrohenrique.negri@gmail.com");
+        
+        envioTLS(wrapper);
         
 //        envioSSL(new TotemEmailWrapper("Erro Totem Desktop 2", "Erro grave 2", "Pane Sistema 2"));
     }
@@ -48,7 +51,11 @@ public class TotemEmail {
         log.info("Fim: {0}", Calendar.getInstance().getTime());
     }
 
-    private static void envioTLS(TotemEmailWrapper wrapper) {
+    /**
+     * 
+     * @param wrapper 
+     */
+    private static void envioTLS(final TotemEmailWrapper wrapper) {
 
         /** HTML **/
         
@@ -63,11 +70,7 @@ public class TotemEmail {
             new javax.mail.Authenticator() {
                 @Override
                 protected PasswordAuthentication getPasswordAuthentication() {
-                    
-                    // iTotemService.recuperaParametroPorNome("EMAIL_USERNAME").getValor()
-                    // iTotemService.recuperaParametroPorNome("EMAIL_PASSWORD").getValor()
-                    
-                    return new PasswordAuthentication(USERNAME, PASSWORD);
+                    return new PasswordAuthentication(wrapper.getUsername(), wrapper.getPassword());
                 }
             }
         );
@@ -78,10 +81,10 @@ public class TotemEmail {
 
             MimeMessage message = new MimeMessage(session);
 
-            message.setFrom(new InternetAddress(FROM));// iTotemService.recuperaParametroPorNome("EMAIL_FROM").getValor()
+            message.setFrom(new InternetAddress(wrapper.getFrom()));
 
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(TO)); // iTotemService.recuperaParametroPorNome("EMAIL_PARA").getValor()
-//            message.addRecipients(Message.RecipientType.CC, iTotemService.recuperaParametroPorNome("EMAIL_TO").getValor());
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(wrapper.getTo()));
+            message.addRecipients(Message.RecipientType.CC, wrapper.getCc());
             
             /** Titulo **/
             message.setSubject(wrapper.getTitulo());
@@ -106,7 +109,8 @@ public class TotemEmail {
         }
     }
 
-    private static void envioSSL(TotemEmailWrapper wrapper) throws Exception {
+    @Deprecated
+    private static void envioSSL(final TotemEmailWrapper wrapper) throws Exception {
 
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.laulettaepereira.com.br");
@@ -119,7 +123,7 @@ public class TotemEmail {
             new javax.mail.Authenticator() {
                 @Override
                 protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(USERNAME, PASSWORD);
+                    return new PasswordAuthentication(wrapper.getUsername(), wrapper.getPassword());
                 }
             }
         );
@@ -130,10 +134,10 @@ public class TotemEmail {
 
             MimeMessage message = new MimeMessage(session);
 
-            message.setFrom(new InternetAddress(FROM));
+            message.setFrom(new InternetAddress(wrapper.getFrom()));
 
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(TO));
-//            message.addRecipients(Message.RecipientType.CC, iTotemService.recuperaParametroPorNome("EMAIL_PARA").getValor());
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(wrapper.getTo()));
+            message.addRecipient(Message.RecipientType.CC, new InternetAddress(wrapper.getCc()));
             
             /** Titulo **/
             message.setSubject(wrapper.getTitulo());
