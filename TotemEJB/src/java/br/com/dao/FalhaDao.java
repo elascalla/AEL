@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.totem.dao;
+package br.com.dao;
 
-import br.com.totem.entity.Falha;
-import br.com.totem.wrapper.FalhaWrapper;
+import br.com.entity.Falha;
+import br.com.wrapper.FalhaWrapper;
 import java.util.Calendar;
 import javax.persistence.EntityManager;
 

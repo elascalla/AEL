@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.totem.wrapper;
+package br.com.wrapper;
 
-import br.com.totem.util.TotemUtil;
+import br.com.util.TotemUtil;
 
 /**
  *
@@ -13,9 +13,9 @@ import br.com.totem.util.TotemUtil;
  */
 public class FalhaWrapper {
     
-    private TotemWrapperIn totemWrapperIn;
+    private TotemInWrapper totemWrapperIn;
     
-    private TotemWrapperOut totemWrapperOut;
+    private TotemOutWrapper totemWrapperOut;
     
     private String mensagem;
     
@@ -26,7 +26,7 @@ public class FalhaWrapper {
     public FalhaWrapper() {
     }
 
-    public FalhaWrapper(TotemWrapperIn totemWrapperIn, TotemWrapperOut totemWrapperOut, String mensagem, String stackTrace, Exception exception) {
+    public FalhaWrapper(TotemInWrapper totemWrapperIn, TotemOutWrapper totemWrapperOut, String mensagem, String stackTrace, Exception exception) {
         this.totemWrapperIn = totemWrapperIn;
         this.totemWrapperOut = totemWrapperOut;
         this.mensagem = mensagem;
@@ -34,19 +34,19 @@ public class FalhaWrapper {
         this.exception = exception;
     }
 
-    public TotemWrapperIn getTotemWrapperIn() {
+    public TotemInWrapper getTotemWrapperIn() {
         return totemWrapperIn;
     }
 
-    public void setTotemWrapperIn(TotemWrapperIn totemWrapperIn) {
+    public void setTotemWrapperIn(TotemInWrapper totemWrapperIn) {
         this.totemWrapperIn = totemWrapperIn;
     }
 
-    public TotemWrapperOut getTotemWrapperOut() {
+    public TotemOutWrapper getTotemWrapperOut() {
         return totemWrapperOut;
     }
 
-    public void setTotemWrapperOut(TotemWrapperOut totemWrapperOut) {
+    public void setTotemWrapperOut(TotemOutWrapper totemWrapperOut) {
         this.totemWrapperOut = totemWrapperOut;
     }
 

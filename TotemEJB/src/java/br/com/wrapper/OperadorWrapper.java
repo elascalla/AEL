@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.totem.wrapper;
+package br.com.wrapper;
 
 import java.io.Serializable;
 
@@ -11,16 +11,16 @@ import java.io.Serializable;
  *
  * @author totem-servidor
  */
-public class Operador implements Serializable {
+public class OperadorWrapper implements Serializable {
     
     private String cns;
     
     private String senha;
 
-    public Operador() {
+    public OperadorWrapper() {
     }
 
-    public Operador(String cns, String senha) {
+    public OperadorWrapper(String cns, String senha) {
         this.cns = cns;
         this.senha = senha;
     }

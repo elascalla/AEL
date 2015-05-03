@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.totem.wrapper;
+package br.com.wrapper;
 
-import br.com.totem.entity.Acesso;
+import br.com.entity.Acesso;
 import java.io.Serializable;
 
 /**
@@ -14,15 +14,15 @@ import java.io.Serializable;
  * 
  * @author totem-servidor
  */
-public class TotemWrapperIn implements Serializable{
+public class TotemInWrapper implements Serializable{
     
     private Acesso acesso;
     
-    private Sistema sistema;
+    private SistemaWrapper sistema;
     
-    private Operador operador;
+    private OperadorWrapper operador;
     
-    private Usuario usuario;
+    private UsuarioWrapper usuario;
     
     private String nomePesquisa; /** Nome Usuário **/
     
@@ -40,14 +40,14 @@ public class TotemWrapperIn implements Serializable{
     
     private Integer numeroElementos;
 
-    public TotemWrapperIn() {
+    public TotemInWrapper() {
     }
 
-    public TotemWrapperIn(Usuario usuario) {
+    public TotemInWrapper(UsuarioWrapper usuario) {
         this.usuario = usuario;
     }
 
-    public TotemWrapperIn(Acesso acesso, Sistema sistema, Operador operador, Usuario usuario, String nomePesquisa, 
+    public TotemInWrapper(Acesso acesso, SistemaWrapper sistema, OperadorWrapper operador, UsuarioWrapper usuario, String nomePesquisa, 
         String nomeMaePesquisa, String nomePaiPesquisa, String dataNascimentoPesquisa, String cpfPesquisa, 
         String cnsPesquisa, ModoConsultaEnum modoConsulta, Integer numeroElementos) {
         
@@ -65,11 +65,11 @@ public class TotemWrapperIn implements Serializable{
         this.numeroElementos        = numeroElementos;
     }
 
-    public Usuario getUsuario() {
+    public UsuarioWrapper getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(UsuarioWrapper usuario) {
         this.usuario = usuario;
     }
 
@@ -137,19 +137,19 @@ public class TotemWrapperIn implements Serializable{
         this.numeroElementos = numeroElementos;
     }
 
-    public Sistema getSistema() {
+    public SistemaWrapper getSistema() {
         return sistema;
     }
 
-    public void setSistema(Sistema sistema) {
+    public void setSistema(SistemaWrapper sistema) {
         this.sistema = sistema;
     }
 
-    public Operador getOperador() {
+    public OperadorWrapper getOperador() {
         return operador;
     }
 
-    public void setOperador(Operador operador) {
+    public void setOperador(OperadorWrapper operador) {
         this.operador = operador;
     }
 

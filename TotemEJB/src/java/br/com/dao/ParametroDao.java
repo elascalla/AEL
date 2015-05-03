@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.totem.dao;
+package br.com.dao;
 
-import br.com.totem.entity.Parametro;
-import br.com.totem.util.TotemUtil;
+import br.com.entity.Parametro;
+import br.com.util.TotemUtil;
 import javax.persistence.EntityManager;
 
 /**

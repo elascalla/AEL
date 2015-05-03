@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.totem.wrapper;
+package br.com.wrapper;
 
-import br.com.totem.util.TotemUtil;
+import br.com.util.TotemUtil;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

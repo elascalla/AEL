@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.totem.entity;
+package br.com.entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -23,35 +23,35 @@ import javax.persistence.TemporalType;
  * @author Andre
  */
 @Entity
-@Table(name = "TB_PARAMETRO")
+@Table(name = "TB_ACESSO")
 @NamedQueries({
-    @NamedQuery(name = "Parametro.recuperaParametroPorNome", query = "SELECT p FROM Parametro p WHERE p.nome = :nome")
+    @NamedQuery(name = "Acesso.recuperaAcessoPorHashAndChave", query = "SELECT a FROM Acesso a WHERE a.hash = :hash AND a.chave = :chave")
 })
-public class Parametro implements Serializable {
+public class Acesso implements Serializable {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @Column(name = "NOME")
-    private String nome;
+    @Column(name = "HASH")
+    private Integer hash;
 
-    @Column(name = "VALOR")
-    private String valor;
+    @Column(name = "CHAVE")
+    private String chave;
     
-    @Column(name = "DATA_PARAMETRO")
+    @Column(name = "DATA_ACESSO")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataAcesso;
     
-    public Parametro() {
+    public Acesso() {
     }
 
-    public Parametro(String nome, String valor, Date dataAcesso) {
-        this.nome = nome;
-        this.valor = valor;
+    public Acesso(Integer hash, String chave, Date dataAcesso) {
+        this.hash       = hash;
+        this.chave      = chave;
         this.dataAcesso = dataAcesso;
     }
-
+    
     public Long getId() {
         return id;
     }
@@ -60,20 +60,20 @@ public class Parametro implements Serializable {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getChave() {
+        return chave;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setChave(String chave) {
+        this.chave = chave;
     }
 
-    public String getValor() {
-        return valor;
+    public Integer getHash() {
+        return hash;
     }
 
-    public void setValor(String valor) {
-        this.valor = valor;
+    public void setHash(Integer hash) {
+        this.hash = hash;
     }
 
     public Date getDataAcesso() {
@@ -94,10 +94,10 @@ public class Parametro implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Parametro)) {
+        if (!(object instanceof Acesso)) {
             return false;
         }
-        Parametro other = (Parametro) object;
+        Acesso other = (Acesso) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -106,6 +106,6 @@ public class Parametro implements Serializable {
 
     @Override
     public String toString() {
-        return "br.com.entidade.Parametro[ id=" + id + " ]";
+        return "br.com.entidade.TabelaAcesso[ id=" + id + " ]";
     }
 }

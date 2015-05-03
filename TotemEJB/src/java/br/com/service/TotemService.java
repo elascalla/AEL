@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.totem.service;
+package br.com.service;
 
-import br.com.totem.util.TotemEmail;
-import br.com.totem.dao.AcessoDao;
-import br.com.totem.dao.FalhaDao;
-import br.com.totem.dao.ParametroDao;
-import br.com.totem.entity.Acesso;
-import br.com.totem.entity.Parametro;
-import br.com.totem.wrapper.FalhaWrapper;
-import br.com.totem.wrapper.TotemEmailWrapper;
+import br.com.util.TotemEmail;
+import br.com.dao.AcessoDao;
+import br.com.dao.FalhaDao;
+import br.com.dao.ParametroDao;
+import br.com.entity.Acesso;
+import br.com.entity.Parametro;
+import br.com.wrapper.FalhaWrapper;
+import br.com.wrapper.TotemEmailWrapper;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -26,9 +26,9 @@ import org.apache.logging.log4j.Logger;
  */
 @Stateless
 @Remote(ITotemService.class)
-public class TotemServiceImpl implements ITotemService {
+public class TotemService implements ITotemService {
     
-    private static final Logger log = LogManager.getLogger(TotemServiceImpl.class);
+    private static final Logger log = LogManager.getLogger(TotemService.class);
     
     @PersistenceContext(unitName = "totemPU")
     private EntityManager em;
@@ -43,11 +43,11 @@ public class TotemServiceImpl implements ITotemService {
         
 //        try{
         
-            log.debug("Início classe: {0} método: {1}", TotemServiceImpl.class.getName(), "inclui");
+            log.debug("Início classe: {0} método: {1}", TotemService.class.getName(), "inclui");
 
             em.persist(object);
 
-            log.debug("Fim classe: {0} método: {1}", TotemServiceImpl.class.getName(), "inclui");
+            log.debug("Fim classe: {0} método: {1}", TotemService.class.getName(), "inclui");
             
 //        } catch(Exception ex){
 //            
@@ -66,11 +66,11 @@ public class TotemServiceImpl implements ITotemService {
     @Override
     public Object altera(Object object) throws Exception {
         
-        log.debug("Início classe: {0} método: {1}", TotemServiceImpl.class.getName(), "altera");
+        log.debug("Início classe: {0} método: {1}", TotemService.class.getName(), "altera");
         
         Object alterado = em.merge(object);
         
-        log.debug("Fim classe: {0} método: {1}", TotemServiceImpl.class.getName(), "altera");
+        log.debug("Fim classe: {0} método: {1}", TotemService.class.getName(), "altera");
         
         return alterado;
     }
@@ -83,11 +83,11 @@ public class TotemServiceImpl implements ITotemService {
     @Override
     public void exclui(Class classObject, Long idObjectDelete) {
         
-        log.debug("Início classe: {0} método: {1}", TotemServiceImpl.class.getName(), "exclui");
+        log.debug("Início classe: {0} método: {1}", TotemService.class.getName(), "exclui");
         
         em.remove(em.find(classObject, idObjectDelete));
         
-        log.debug("Fim classe: {0} método: {1}", TotemServiceImpl.class.getName(), "exclui");
+        log.debug("Fim classe: {0} método: {1}", TotemService.class.getName(), "exclui");
     }
     
     /**
@@ -99,11 +99,11 @@ public class TotemServiceImpl implements ITotemService {
     @Override
     public Object recupera(Class classObject, Object id) {
         
-        log.debug("Início classe: {0} método: {1}", TotemServiceImpl.class.getName(), "recupera");
+        log.debug("Início classe: {0} método: {1}", TotemService.class.getName(), "recupera");
         
         Object pesquisado = em.find(classObject, id);
         
-        log.debug("Início classe: {0} método: {1}", TotemServiceImpl.class.getName(), "recupera");
+        log.debug("Início classe: {0} método: {1}", TotemService.class.getName(), "recupera");
         
         return pesquisado;
     }
@@ -118,11 +118,11 @@ public class TotemServiceImpl implements ITotemService {
     @Override
     public Acesso recuperaAcessoPorHashAndChave(Integer hash, String chave) throws Exception {
         
-        log.debug("Início classe: {0} método: {1}", TotemServiceImpl.class.getName(), "recuperaAcessoPorHashAndChave");
+        log.debug("Início classe: {0} método: {1}", TotemService.class.getName(), "recuperaAcessoPorHashAndChave");
         
         Acesso acesso = new AcessoDao().recuperaAcessoPorHashAndChave(em, hash, chave);
         
-        log.debug("Fim classe: {0} método: {1}", TotemServiceImpl.class.getName(), "recuperaAcessoPorHashAndChave");
+        log.debug("Fim classe: {0} método: {1}", TotemService.class.getName(), "recuperaAcessoPorHashAndChave");
         
         return acesso;
     }
@@ -136,11 +136,11 @@ public class TotemServiceImpl implements ITotemService {
     @Override
     public Parametro recuperaParametroPorNome(String nome) throws Exception {
         
-        log.debug("Início classe: {0} método: {1}", TotemServiceImpl.class.getName(), "recuperaParametroPorNome");
+        log.debug("Início classe: {0} método: {1}", TotemService.class.getName(), "recuperaParametroPorNome");
         
         Parametro parametro = new ParametroDao().recuperaParametroPorNome(em, nome);
         
-        log.debug("Fim classe: {0} método: {1}", TotemServiceImpl.class.getName(), "recuperaParametroPorNome");
+        log.debug("Fim classe: {0} método: {1}", TotemService.class.getName(), "recuperaParametroPorNome");
         
         return parametro;
     }

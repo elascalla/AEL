@@ -5,13 +5,13 @@
  */
 package br.com.ws;
 
-import br.com.totem.entity.Acesso;
-import br.com.totem.service.ITotemService;
-import br.com.totem.wrapper.FalhaWrapper;
-import br.com.totem.wrapper.TotemWrapperIn;
-import br.com.totem.wrapper.TotemWrapperOut;
-import br.com.totem.wrapper.Usuario;
-import br.com.totem.util.TotemUtil;
+import br.com.entity.Acesso;
+import br.com.service.ITotemService;
+import br.com.wrapper.FalhaWrapper;
+import br.com.wrapper.TotemInWrapper;
+import br.com.wrapper.TotemOutWrapper;
+import br.com.wrapper.UsuarioWrapper;
+import br.com.util.TotemUtil;
 import javax.ejb.EJB;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
@@ -50,11 +50,11 @@ public class TotemServidor {
      * @return 
      */
     @WebMethod(operationName = "integraTotem")
-    public TotemWrapperOut integraTotem(@WebParam(name = "totem") TotemWrapperIn wrapperIn) {
+    public TotemOutWrapper integraTotem(@WebParam(name = "totem") TotemInWrapper wrapperIn) {
         
         log.info("Início WS - integraTotem.");
         
-        TotemWrapperOut wrapperOut = null;
+        TotemOutWrapper wrapperOut = null;
         
         try{
             
@@ -94,7 +94,7 @@ public class TotemServidor {
      * @param wrapperIn
      * @throws Exception 
      */
-    private void checaAcessoSeguranca(TotemWrapperIn wrapperIn) throws Exception {
+    private void checaAcessoSeguranca(TotemInWrapper wrapperIn) throws Exception {
         
         if(wrapperIn == null){
             throw new Exception("Falha ao tentar consultar cadastro.");
@@ -120,7 +120,7 @@ public class TotemServidor {
      * @param wrapperIn
      * @return 
      */
-    private Object invocaIntegracaoCadSus(TotemWrapperIn wrapperIn) {
+    private Object invocaIntegracaoCadSus(TotemInWrapper wrapperIn) {
         return new Object();
     }
 
@@ -130,11 +130,11 @@ public class TotemServidor {
      * @return
      * @throws Exception 
      */
-    private TotemWrapperOut geraRespostaParaTotem(TotemWrapperIn wrapperIn, Object outCadSus) throws Exception {
+    private TotemOutWrapper geraRespostaParaTotem(TotemInWrapper wrapperIn, Object outCadSus) throws Exception {
         
         validaIntegracaoCadSus(outCadSus);
         
-        return new TotemWrapperOut(new Usuario(wrapperIn.getNomePesquisa() + " - " + wrapperIn.getUsuario().getNome()));
+        return new TotemOutWrapper(new UsuarioWrapper(wrapperIn.getNomePesquisa() + " - " + wrapperIn.getUsuario().getNome()));
     }
 
     /**
@@ -144,7 +144,7 @@ public class TotemServidor {
      * @param wrapperIn
      * @throws Exception 
      */
-    private void validaTotemWrapperIn(TotemWrapperIn wrapperIn) throws Exception {
+    private void validaTotemWrapperIn(TotemInWrapper wrapperIn) throws Exception {
         
         if(wrapperIn == null){
             throw new Exception("Falha ao tentar consultar cadastro.");

@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.totem.util;
+package br.com.util;
 
-import br.com.totem.dao.ParametroDao;
-import br.com.totem.wrapper.TotemEmailWrapper;
+import br.com.dao.ParametroDao;
+import br.com.wrapper.TotemEmailWrapper;
 import java.util.Calendar;
 import java.util.Properties;
 import javax.mail.Message;

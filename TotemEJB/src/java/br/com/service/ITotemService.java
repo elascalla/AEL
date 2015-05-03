@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.totem.service;
+package br.com.service;
 
-import br.com.totem.entity.Acesso;
-import br.com.totem.entity.Parametro;
-import br.com.totem.wrapper.FalhaWrapper;
+import br.com.entity.Acesso;
+import br.com.entity.Parametro;
+import br.com.wrapper.FalhaWrapper;
 import javax.ejb.Remote;
 
 /**

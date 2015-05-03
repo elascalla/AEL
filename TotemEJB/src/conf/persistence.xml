@@ -3,11 +3,11 @@
   <persistence-unit name="totemPU" transaction-type="JTA">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <jta-data-source>jdbc/totem</jta-data-source>
-    <class>br.com.totem.entity.Acesso</class>
     <class>br.com.totem.entity.FalhaTotem</class>
-    <class>br.com.totem.entity.Parametro</class>
-    <class>br.com.totem.entity.Pessoa</class>
-    <class>br.com.totem.entity.Totem</class>
+    <class>br.com.entity.Totem</class>
+    <class>br.com.entity.Acesso</class>
+    <class>br.com.entity.Parametro</class>
+    <class>br.com.entity.Pessoa</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <property name="eclipselink.deploy-on-startup" value="true"/>
