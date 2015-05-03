@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.util;
+package br.com.totem.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

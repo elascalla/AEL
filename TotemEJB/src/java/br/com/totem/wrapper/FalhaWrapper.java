@@ -5,7 +5,7 @@
  */
 package br.com.totem.wrapper;
 
-import br.com.util.TotemUtil;
+import br.com.totem.util.TotemUtil;
 
 /**
  *

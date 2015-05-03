@@ -6,7 +6,7 @@
 package br.com.totem.dao;
 
 import br.com.totem.entity.Acesso;
-import br.com.util.TotemUtil;
+import br.com.totem.util.TotemUtil;
 import javax.persistence.EntityManager;
 
 /**

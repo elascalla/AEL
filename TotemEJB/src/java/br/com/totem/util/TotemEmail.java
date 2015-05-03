@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.email;
+package br.com.totem.util;
 
 import br.com.wrapper.TotemEmailWrapper;
 import java.util.Calendar;

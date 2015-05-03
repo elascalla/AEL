@@ -17,6 +17,14 @@ import javax.ejb.Remote;
 @Remote
 public interface ITotemService {
     
+    public void inclui(Object object) throws Exception;
+    
+    public Object altera(Object object) throws Exception;
+    
+    public void exclui(Class classObject, Long idObjectDelete);
+    
+    public Object recupera(Class classObject, Object id);
+    
     public Parametro recuperaParametroPorNome(String nome) throws Exception;
     
     public Acesso recuperaAcessoPorHashAndChave(Integer hash, String chave) throws Exception;

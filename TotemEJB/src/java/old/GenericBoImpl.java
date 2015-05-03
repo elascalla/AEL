@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.generic.bo.impl;
+package old;
 
-import br.com.generic.bo.IGenericBoRemote;
-import br.com.generic.dao.IGenericDao;
-import br.com.generic.dao.impl.GenericDaoImpl;
+import old.IGenericBoRemote;
+import old.IGenericDao;
+import old.GenericDaoImpl;
 import javax.persistence.EntityManager;
 
 /**

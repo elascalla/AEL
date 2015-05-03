@@ -3,15 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.totem.service.impl;
+package br.com.totem.service;
 
-import br.com.email.TotemEmail;
+import br.com.totem.util.TotemEmail;
 import br.com.totem.dao.AcessoDao;
 import br.com.totem.dao.FalhaDao;
 import br.com.totem.dao.ParametroDao;
 import br.com.totem.entity.Acesso;
 import br.com.totem.entity.Parametro;
-import br.com.totem.service.ITotemService;
 import br.com.totem.wrapper.FalhaWrapper;
 import br.com.wrapper.TotemEmailWrapper;
 import javax.ejb.Remote;
@@ -33,6 +32,81 @@ public class TotemServiceImpl implements ITotemService {
     
     @PersistenceContext(unitName = "totemPU")
     private EntityManager em;
+    
+    /**
+     * 
+     * @param object
+     * @throws Exception 
+     */
+    @Override
+    public void inclui(Object object) throws Exception {
+        
+//        try{
+        
+            log.debug("Início classe: {0} método: {1}", TotemServiceImpl.class.getName(), "inclui");
+
+            em.persist(object);
+
+            log.debug("Fim classe: {0} método: {1}", TotemServiceImpl.class.getName(), "inclui");
+            
+//        } catch(Exception ex){
+//            
+//            log.error("Falha capturada.", ex);
+//            
+//            new TotemRepositorio().registrarFalha(em, falhaWrapper);
+//        }
+    }
+    
+    /**
+     * 
+     * @param object
+     * @return
+     * @throws Exception 
+     */
+    @Override
+    public Object altera(Object object) throws Exception {
+        
+        log.debug("Início classe: {0} método: {1}", TotemServiceImpl.class.getName(), "altera");
+        
+        Object alterado = em.merge(object);
+        
+        log.debug("Fim classe: {0} método: {1}", TotemServiceImpl.class.getName(), "altera");
+        
+        return alterado;
+    }
+
+    /**
+     * 
+     * @param classObject
+     * @param idObjectDelete 
+     */
+    @Override
+    public void exclui(Class classObject, Long idObjectDelete) {
+        
+        log.debug("Início classe: {0} método: {1}", TotemServiceImpl.class.getName(), "exclui");
+        
+        em.remove(em.find(classObject, idObjectDelete));
+        
+        log.debug("Fim classe: {0} método: {1}", TotemServiceImpl.class.getName(), "exclui");
+    }
+    
+    /**
+     * 
+     * @param classObject
+     * @param id
+     * @return 
+     */
+    @Override
+    public Object recupera(Class classObject, Object id) {
+        
+        log.debug("Início classe: {0} método: {1}", TotemServiceImpl.class.getName(), "recupera");
+        
+        Object pesquisado = em.find(classObject, id);
+        
+        log.debug("Início classe: {0} método: {1}", TotemServiceImpl.class.getName(), "recupera");
+        
+        return pesquisado;
+    }
     
     /**
      * 

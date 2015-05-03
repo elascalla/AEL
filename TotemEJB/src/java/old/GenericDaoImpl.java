@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.generic.dao.impl;
+package old;
 
-import br.com.generic.dao.IGenericDao;
-import br.com.generic.entity.EntityManagerUtil;
+import old.IGenericDao;
+import old.EntityManagerUtil;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;

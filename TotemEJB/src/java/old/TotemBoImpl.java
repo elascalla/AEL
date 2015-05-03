@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.totem.bo.impl;
+package old;
 
-import br.com.totem.bo.ITotemBo;
+import old.ITotemBo;
 
 /**
  *

@@ -5,14 +5,13 @@
  */
 package br.com.ws;
 
-import br.com.generic.service.IGenericService;
 import br.com.totem.entity.Acesso;
 import br.com.totem.service.ITotemService;
 import br.com.totem.wrapper.FalhaWrapper;
 import br.com.totem.wrapper.TotemWrapperIn;
 import br.com.totem.wrapper.TotemWrapperOut;
 import br.com.totem.wrapper.Usuario;
-import br.com.util.TotemUtil;
+import br.com.totem.util.TotemUtil;
 import javax.ejb.EJB;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
@@ -36,9 +35,6 @@ public class TotemServidor {
     
     private static final Logger log = LogManager.getLogger(TotemServidor.class.getName());
 
-    @EJB
-    private IGenericService iGenericService;
-    
     @EJB
     private ITotemService iTotemService;
     
@@ -178,7 +174,7 @@ public class TotemServidor {
      * @param acesso 
      */
     private void removeAcessoPorHashAndChave(Acesso acesso) {
-        iGenericService.exclui(acesso.getClass(), acesso.getId());
+        iTotemService.exclui(acesso.getClass(), acesso.getId());
     }
 
     /**
