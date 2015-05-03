@@ -20,5 +20,5 @@ public interface IGenericService {
     
     public void exclui(Class classObject, Long idObjectDelete);
     
-    public Object recupera(Class clazz, Object id);
+    public Object recupera(Class classObject, Object id);
 }

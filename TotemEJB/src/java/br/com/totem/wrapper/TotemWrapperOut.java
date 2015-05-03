@@ -5,6 +5,7 @@
  */
 package br.com.totem.wrapper;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -13,7 +14,7 @@ import java.util.Date;
  * 
  * @author totem-servidor
  */
-public class TotemWrapperOut {
+public class TotemWrapperOut implements Serializable{
     
     private Sistema sistema;
     

@@ -25,7 +25,7 @@ import org.apache.logging.log4j.Logger;
  * WebService responsavel por receber uma requisicao do cliente ( Totem Desktop ).
  * 
  * Duas situações de responsabilidade:
- *  1 - Comsumir requisicao e gerenciar a producao de dados para integracao entre totem-servidor -> CadSus
+ *  1 - Consumir requisicao e gerenciar a producao de dados para integracao entre totem-servidor -> CadSus
  *  2 - Produzir a integracao de retorno para o Totem Desktop.
  * 
  * 
@@ -78,7 +78,7 @@ public class TotemServidor {
              **/
             wrapperOut = geraRespostaParaTotem(wrapperIn, invocaIntegracaoCadSus(wrapperIn));
                 
-        }catch(Exception ex){
+        } catch(Exception ex){
             
             log.error("Falha capturada.", ex);
             iTotemService.registrarFalha(new FalhaWrapper(wrapperIn, wrapperOut, "FALHA EXECUÇÃO", "FALHA CAPTURADA", ex));

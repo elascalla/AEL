@@ -5,7 +5,6 @@
  */
 package br.com.totem.wrapper;
 
-import br.com.totem.entity.*;
 import java.io.Serializable;
 
 /**

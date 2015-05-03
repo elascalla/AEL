@@ -39,7 +39,7 @@ public class TotemEmail {
 //        envioSSL(new TotemEmailWrapper("Erro Totem Desktop 2", "Erro grave 2", "Pane Sistema 2"));
     }
     
-    public static void enviaEmail(TotemEmailWrapper wrapper){
+    public static void envia(TotemEmailWrapper wrapper){
         
         log.info("Início: {0}", Calendar.getInstance().getTime());
         

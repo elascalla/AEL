@@ -26,6 +26,11 @@ public class GenericServiceImpl implements IGenericService {
     @PersistenceContext(unitName = "totemPU")
     private EntityManager em;
 
+    /**
+     * 
+     * @param object
+     * @throws Exception 
+     */
     @Override
     public void inclui(Object object) throws Exception {
         
@@ -44,7 +49,13 @@ public class GenericServiceImpl implements IGenericService {
 //            new TotemRepositorio().registrarFalha(em, falhaWrapper);
 //        }
     }
-
+    
+    /**
+     * 
+     * @param object
+     * @return
+     * @throws Exception 
+     */
     @Override
     public Object altera(Object object) throws Exception {
         
@@ -57,6 +68,11 @@ public class GenericServiceImpl implements IGenericService {
         return alterado;
     }
 
+    /**
+     * 
+     * @param classObject
+     * @param idObjectDelete 
+     */
     @Override
     public void exclui(Class classObject, Long idObjectDelete) {
         
@@ -67,54 +83,21 @@ public class GenericServiceImpl implements IGenericService {
         log.debug("Fim classe: {0} método: {1}", GenericServiceImpl.class.getName(), "exclui");
     }
     
+    /**
+     * 
+     * @param classObject
+     * @param id
+     * @return 
+     */
     @Override
-    public Object recupera(Class clazz, Object id) {
+    public Object recupera(Class classObject, Object id) {
         
         log.debug("Início classe: {0} método: {1}", GenericServiceImpl.class.getName(), "recupera");
         
-        Object pesquisado = em.find(clazz, id);
+        Object pesquisado = em.find(classObject, id);
         
         log.debug("Início classe: {0} método: {1}", GenericServiceImpl.class.getName(), "recupera");
         
         return pesquisado;
     }
-    
-//    private final IGenericBoRemote genericBo = new GenericBoImpl();
-
-//    @Override
-//    public Object salvar(Object object) throws Exception {
-//        try {
-//            return genericBo.salvar(object);
-//        } catch (Exception e) {
-//            return null;
-//        }
-//    }
-    
-//    @Override
-//    public Object salvar(Object object) throws Exception {
-//        try {
-//            
-//            em.
-//            
-//            return genericBo.salvar(object);
-//        
-//        } catch (Exception e) {
-//            return null;
-//        }
-//    }
-//
-//    @Override
-//    public Object buscarObjetoPorId(Class clazz, Object id) {
-//        return genericBo.buscarObjetoPorId(clazz, id);
-//    }
-//
-//    @Override
-//    public Boolean excluir(Object object) {
-//        return genericBo.excluir(object);
-//    }
-//
-//    @Override
-//    public String msg() {
-//        return "EJB";
-//    }
 }

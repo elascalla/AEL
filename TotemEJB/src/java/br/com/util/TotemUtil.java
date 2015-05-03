@@ -30,28 +30,33 @@ public class TotemUtil {
         return Calendar.DAY_OF_YEAR;
     }
     
+    /**
+     * 
+     * @param data
+     * @return 
+     */
     public static long quantidadeDiasAtual(Date data) {
         
-        SimpleDateFormat df = new SimpleDateFormat ("dd/MM/yyyy"); 
-        
-        Date d1 = null;   
-        Date d2 = null;
-        
+        Long dias = null;
+
         try {  
-                if(data != null){
-                    d1 = data;
-                }else{
-                    d1 = df.parse ("01/01/" + Calendar.getInstance().getTime().getYear());
-                }
+            
+            SimpleDateFormat df = new SimpleDateFormat ("dd/MM/yyyy"); 
+            
+            Date d1 = df.parse ("01/01/" + Calendar.getInstance().get(Calendar.YEAR));;   
+            
+            if(data != null){
+                d1 = data;
+            }
+
+            Date d2 = Calendar.getInstance().getTime();
+            
+            long dt = (d2.getTime() - d1.getTime()) + 3600000;        
+            dias = (dt / 86400000L);
                 
-                d2 = Calendar.getInstance().getTime();
-                
-        } catch (java.text.ParseException evt ) {
-            log.error("Ocorreu erro inesperado.", evt);
-        }  
-        
-        long dt = (d2.getTime() - d1.getTime()) + 3600000;        
-        long dias = (dt / 86400000L);
+        } catch (Exception ex) {
+            log.error("Ocorreu erro inesperado.", ex);
+        }
         
         return dias;
     }

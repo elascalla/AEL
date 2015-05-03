@@ -6,7 +6,6 @@
 package br.com.totem.service.impl;
 
 import br.com.email.TotemEmail;
-import br.com.generic.service.impl.GenericServiceImpl;
 import br.com.totem.dao.AcessoDao;
 import br.com.totem.dao.FalhaDao;
 import br.com.totem.dao.ParametroDao;
@@ -79,6 +78,6 @@ public class TotemServiceImpl implements ITotemService {
         new FalhaDao().registrarFalha(em, falhaWrapper);
         
         /** Email **/
-        TotemEmail.enviaEmail(new TotemEmailWrapper("Falha Capturada", falhaWrapper.getMensagem(), falhaWrapper.getStackTrace()));
+        TotemEmail.envia(new TotemEmailWrapper("Falha Capturada", falhaWrapper.getMensagem(), falhaWrapper.getStackTrace()));
     }   
 }
